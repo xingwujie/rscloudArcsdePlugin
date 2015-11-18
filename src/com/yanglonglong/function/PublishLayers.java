@@ -123,6 +123,7 @@ public class PublishLayers {
                     + "\"UTF-8\""
                     + "?><dataStore>" +
                     "<name>"+dataStoryPara.get("name")+"</name>" +
+                    "<srs>EPSG:4326</srs>" +
                     "<connectionParameters>" +
                     "<server>"+dataStoryPara.get("ip")+"</server>" +
                     "<port>"+dataStoryPara.get("port")+"</port>" +

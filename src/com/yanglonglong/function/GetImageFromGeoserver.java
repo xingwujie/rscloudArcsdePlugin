@@ -32,11 +32,11 @@ public class GetImageFromGeoserver {
     public static void main(String[] args) throws Exception {
 
         HashMap<String,String> addLayerPara =  config.getAddLayerPara();
-//        System.out.println(getImageRange(addLayerPara, "SDE.LUWANG")); // get image range
-        GetImageFromGeoserver.saveImage(addLayerPara,getImageRange(addLayerPara, "SDE.LUWANG"),"SDE.LUWANG");
+//        System.out.println(getImageRange(addLayerPara, "SDE.FLOOR3")); // get image range
+//        GetImageFromGeoserver.saveImage(addLayerPara,getImageRange(addLayerPara, "SDE.LUWANG"),"SDE.LUWANG");
     }
 
-    // µ√µΩÕº∆¨∑∂Œß
+    // ÂæóÂà∞ÂõæÁâáËåÉÂõ¥
     public static String getImageRange(HashMap addLayerPara,String fileName) throws Exception{
         String workSpaceName = addLayerPara.get("workspace").toString();
         DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -58,7 +58,7 @@ public class GetImageFromGeoserver {
             String pageHTML = EntityUtils.toString(responseEntity);
             Document doc = Jsoup.parse(pageHTML);
             Element li = doc.select("ul>li:last-child").get(0);
-            String liText = li.text(); // µ√µΩæ≠Œ≥∂»∑∂Œß http://localhost:18080/geoserver/rest/workspaces/abcd/datastores/fromSDE/featuretypes/SDE.LUWANG.html
+            String liText = li.text(); // ÂæóÂà∞ÁªèÁ∫¨Â∫¶ËåÉÂõ¥ http://localhost:18080/geoserver/rest/workspaces/abcd/datastores/fromSDE/featuretypes/SDE.LUWANG.html
             String lng = liText.substring(liText.indexOf("[") + 1, liText.indexOf(","));
             String lat = liText.substring(liText.indexOf(",") + 1, liText.indexOf("]"));
             lnglat = lng.split(":")[0].trim()+","+lat.split(":")[0].trim()+","+lng.split(":")[1].trim()+","+lat.split(":")[1].trim();
@@ -75,7 +75,7 @@ public class GetImageFromGeoserver {
     }
 
     public static byte[] saveImage(HashMap addLayerPara,String imageRange,String fileName) throws Exception{
-        //new“ª∏ˆURL∂‘œÛ
+        //new‰∏Ä‰∏™URLÂØπË±°
 //        System.out.println(imageRange);
         String http = "http://localhost:"+addLayerPara.get("port")+"/geoserver/"+addLayerPara.get("workspace")+"/wms?service=WMS&version=1.1.0&request=GetMap&layers="+addLayerPara.get("workspace")+":"+fileName+"&styles=&bbox="+imageRange+"&width=255&height=255&srs=EPSG:4326&format=image%2Fjpeg";
         byte[] buffer = null;

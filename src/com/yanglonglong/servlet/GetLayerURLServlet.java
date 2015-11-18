@@ -15,9 +15,9 @@ import java.util.HashMap;
 
 public class GetLayerURLServlet extends HttpServlet {
 
-    //³õÊ¼»¯
+    //åˆå§‹åŒ–
     public void init() throws ServletException {
-        System.out.println("ÎÒÊÇinit()·½·¨£¡ÓÃÀ´½øĞĞ³õÊ¼»¯¹¤×÷");
+        System.out.println("æˆ‘æ˜¯init()æ–¹æ³•ï¼ç”¨æ¥è¿›è¡Œåˆå§‹åŒ–å·¥ä½œ");
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -32,6 +32,7 @@ public class GetLayerURLServlet extends HttpServlet {
         String imageURL = "";
         try {
             String imageRange = GetImageFromGeoserver.getImageRange(addLayerPara,fileName);
+//            System.out.println(imageRange);
             imageURL = "http://"+ addLayerPara.get("ip") + ":" + addLayerPara.get("port") + "/" +
                     "geoserver/" + addLayerPara.get("workspace") + "/wms?service=WMS&version=1.1.0&request=GetMap&layers=" +
                     addLayerPara.get("workspace") + ":" + fileName + "&styles=&bbox=" + imageRange +
@@ -42,15 +43,15 @@ public class GetLayerURLServlet extends HttpServlet {
         }
 
         PrintWriter out = null;
-        out = response.getWriter();// »ñµÃÊä³öÁ÷out
+        out = response.getWriter();// è·å¾—è¾“å‡ºæµout
         out.println(imageURL);
-        out.flush(); // ³åË¢»º³åÇø
-        out.close(); // ¹Ø±ÕÊä³ö
+        out.flush(); // å†²åˆ·ç¼“å†²åŒº
+        out.close(); // å…³é—­è¾“å‡º
     }
 
-    //Ïú»ÙÊµÀı
+    //é”€æ¯å®ä¾‹
     public void destroy() {
         super.destroy();
-        System.out.println("ÎÒÊÇdestroy()·½·¨£¡ÓÃÀ´½øĞĞÏú»ÙÊµÀıµÄ¹¤×÷");
+        System.out.println("æˆ‘æ˜¯destroy()æ–¹æ³•ï¼ç”¨æ¥è¿›è¡Œé”€æ¯å®ä¾‹çš„å·¥ä½œ");
     }
 }
